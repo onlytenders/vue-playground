@@ -1,39 +1,13 @@
 <script>
-export default {
-  data() {
-    return {
-      message: 'hello world',
-      classTitle: 'titleBlue'
-    }
-  },
-  methods: {
-    reverseString() {
-      this.message = this.message.split('').reverse().join('')
-    },
+import First from './First.vue'
 
-    changeColor() {
-      if (this.classTitle == 'titleBlue') {
-        this.classTitle = 'titleRed'
-      } else {
-        this.classTitle = 'titleBlue'
-      }
-    }
+export default {
+  components: {
+    First
   }
 }
 </script>
 
 <template>
-<h1 :class="classTitle">{{ message }}</h1>
-<button @click="reverseString">reverse</button>
-<button @click="changeColor">color</button>
+<First />
 </template>
-
-<style>
-.titleBlue {
-  color: blue;
-}
-
-.titleRed {
-  color: red;
-}
-</style>
