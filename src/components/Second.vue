@@ -4,16 +4,11 @@ export default {
     return {
       text: ''
     }
-  },
-  methods: {
-    onType(e) {
-      this.text = e.target.value
-    }
   }
 }
 </script>
 
 <template>
-<input type="text" name="" value="" placeholder="type something" @input="onType">
-<p>{{ text }}</p>  
+  <input v-model="text" placeholder="type something">
+  <p>{{ text }}</p>
 </template>
