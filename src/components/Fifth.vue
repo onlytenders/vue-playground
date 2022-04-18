@@ -4,19 +4,36 @@
     data() {
       return {
         newTodo: '',
-        todos: []
+        hideCompleted: false,
+        todos: [
+          { id : 0, text : "something", done : false }
+        ]
+      }
+    },
+    computed: {
+      filteredTodos: function() {
+        if (!this.hideCompleted) {
+          return this.todos
+        }
+        let filteredTodo = []
+        for (let todo in this.todos) {
+          if (!todo.done) {
+            filteredTodo.push(todo)
+          }
+        }
+        return filtered
       }
     },
     methods: {
       addTodo() {
         if (this.newTodo != '') {
-          this.todos.push({ id: id++, text: this.newTodo })
+          this.todos.push({ id: id++, text: this.newTodo, done: false })
         }
         this.newTodo = ''
       },
       removeTodo(todo) {
-        delete this.todos[todo.id]
-      }
+        this.todos = this.todos.filter((t) => t !== todo)
+      },
     }
   }
 </script>
@@ -27,9 +44,17 @@
     <button>Add new TODO</button>
   </form>
   <ul>
-    <li v-for="todo in todos" :key="todo.id">
-      {{ todo.text }}
+    <li v-for="todo in filteredTodos" :key="todo.id">
+      <input type="checkbox" v-model="todo.done">
+      <span :class="{ done: todo.done }">{{ todo.text }}</span>
       <button @click="removeTodo(todo)" type="button" name="button">X</button>
     </li>
   </ul>
+  <button @click="hideCompleted = !hideCompleted">{{ hideCompleted ? "Show all" : "Hide completed" }}</button>
 </template>
+
+<style media="screen">
+.done {
+  text-decoration: line-through;
+}
+</style>
