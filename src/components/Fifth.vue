@@ -12,16 +12,7 @@
     },
     computed: {
       filteredTodos: function() {
-        if (!this.hideCompleted) {
-          return this.todos
-        }
-        let filteredTodo = []
-        for (let todo in this.todos) {
-          if (!todo.done) {
-            filteredTodo.push(todo)
-          }
-        }
-        return filtered
+        return this.hideCompleted ? this.todos.filter((t) => !t.done) : this.todos
       }
     },
     methods: {
